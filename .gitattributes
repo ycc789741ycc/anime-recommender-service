@@ -1,0 +1,2 @@
+backend/app/app/ml_model/** filter=lfs diff=lfs merge=lfs -text
+backend/app/app/data/** filter=lfs diff=lfs merge=lfs -text

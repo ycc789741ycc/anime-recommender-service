@@ -7,3 +7,6 @@ class BasicResponse(BaseModel):
     message: Optional[Text] = None
     data: Any = None
     time_cost: Optional[Union[float, int]] = None
+
+class TaskResponse(BasicResponse):
+    task_id: Text
