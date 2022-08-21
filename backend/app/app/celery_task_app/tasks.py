@@ -1,15 +1,14 @@
-import asyncio
-import importlib
 import logging
+import functools
 from celery import Task
-from typing import List
+from typing import Dict, List
 
+from asgiref.sync import async_to_sync
 from recanime.anime_store.excel_store import ExcelAnimeStore
 from recanime.recommender.ranking_base_filter.model import FactorizationMachineModel
 from recanime.recommender.ranking_base_filter.predict import RankingBaseAnimeRec
 from recanime.schema.user import ExistedUserAttributesVector
 from recanime.schema.predict import AnimeAttributes, PredictResults
-
 from recanime.utils.model_utils import get_fm_model, get_fm_encoder_config
 from recanime.utils.rec_utils import get_existed_user_attributes_vector
 
@@ -45,28 +44,32 @@ class PredictTask(Task):
             existed_user_attributes_vector=self.existed_user_attributes_vector
         )
 
-
     def __call__(self, *args, **kwargs):
         return self.run(*args, **kwargs)
 
 
 @celery_app.task(
-    ignore_result=False,
+    #ignore_result=False,
     bind=True,
     base=PredictTask,
-    name='{}.{}'.format(__name__, 'Recommend')
+    name='{}.{}'.format(__name__, 'predict')
 )
 def predict_top_k_animes(
     self,
-    anime_attributes: AnimeAttributes,
+    anime_attributes_dict: Dict,
     top_k: int
-) -> List[PredictResults]:
+) -> List[Dict]:
     """
     Essentially the run method of PredictTask
     """
-    results = asyncio.run(self.ranking_base_anime_rec.predict(
+
+    print("ffffdfgdg")
+    partial_function = functools.partial(
+        self.ranking_base_anime_rec.predict,
         anime_store=self.excel_anime_store,
-        attributes=anime_attributes,
+        attributes=AnimeAttributes(**anime_attributes_dict),
         top_k=top_k
-    ))
-    return results
+    )
+    results: List[PredictResults] = async_to_sync(partial_function)()
+
+    return [result.dict() for result in results]

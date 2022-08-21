@@ -110,6 +110,9 @@ services:
     # image: rabbitmq:3-management
     #
     # You also have to change the flower command
+
+  celery-backend:
+    image: redis
   
   flower:
     image: mher/flower:0.9.7
@@ -139,15 +142,12 @@ services:
   
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
-    depends_on:
-      - db
     env_file:
       - .env
     environment:
       - SERVER_NAME=${DOMAIN?Variable not set}
       - SERVER_HOST=https://${DOMAIN?Variable not set}
       # Allow explicit env var override for tests
-      - SMTP_HOST=${SMTP_HOST}
     build:
       context: ./backend
       dockerfile: backend.dockerfile
@@ -163,7 +163,7 @@ services:
   celeryworker:
     image: '${DOCKER_IMAGE_CELERYWORKER?Variable not set}:${TAG-latest}'
     depends_on:
-      - db
+      - celery-backend
       - queue
     env_file:
       - .env
@@ -171,7 +171,6 @@ services:
       - SERVER_NAME=${DOMAIN?Variable not set}
       - SERVER_HOST=https://${DOMAIN?Variable not set}
       # Allow explicit env var override for tests
-      - SMTP_HOST=${SMTP_HOST?Variable not set}
     build:
       context: ./backend
       dockerfile: celeryworker.dockerfile
