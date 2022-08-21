@@ -11,5 +11,5 @@ set +a
 
 cd ./backend/app/
 
-uvicorn app.main:app &
-celery worker -A app.celery_task_app.worker -Q $CELERY_QUEUE_NAME -l info -c 1
+celery worker -A app.celery_task_app.worker -Q $CELERY_QUEUE_NAME -l info -c 1 &
+uvicorn app.main:app

@@ -63,7 +63,6 @@ def predict_top_k_animes(
     Essentially the run method of PredictTask
     """
 
-    print("ffffdfgdg")
     partial_function = functools.partial(
         self.ranking_base_anime_rec.predict,
         anime_store=self.excel_anime_store,
