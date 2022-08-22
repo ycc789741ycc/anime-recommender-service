@@ -8,7 +8,7 @@ from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, v
 
 class Settings(BaseSettings):
     
-    logger_name = "recanime"
+    logger_name = "recanime-backend"
     logger = logging.getLogger(logger_name)
     
     API_V1_STR: str = "/api/v1"
