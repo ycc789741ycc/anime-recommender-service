@@ -10,7 +10,10 @@ class Settings(BaseSettings):
     logger = logging.getLogger(logger_name)
     
     # page keys
-    key_home_page: Text = "home-page"
+    home_page_key: Text = "home-page"
+
+    # urls
+    recanime_backend_base_url: Text = "http://localhost/api/v1"
 
     class Config:
         case_sensitive = True

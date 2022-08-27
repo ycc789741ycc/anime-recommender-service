@@ -13,7 +13,7 @@ def create_app():
         placeholder=placeholder,
         page_tab=PageTab(
             page_name="home-page",
-            key=settings.key_home_page
+            key=settings.home_page_key
         )
     )
 

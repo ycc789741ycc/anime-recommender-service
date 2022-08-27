@@ -1,11 +1,10 @@
 import time
-from typing import Any, Dict, List
+from typing import Dict, List
 
 from celery.result import AsyncResult
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
-from recanime.recommender.ranking_base_filter.predict import RankingBaseAnimeRec
-from recanime.schema.predict import AnimeAttributes, AnimeInfo, PredictResults
+from recanime.schema.predict import AnimeAttributes, PredictResults
 
 from app.schemas.celery import Task
 from app.schemas.response import TaskResponse
@@ -24,11 +23,11 @@ async def anime_recommender_predict(
 ) -> Task:
     """Create celery prediction task. Return task_id to client in order to retrieve result"""
     
-    task_id = predict_top_k_animes.delay(anime_attributes.dict(), top_k)
+    task_id = predict_top_k_animes.delay(anime_attributes.dict(by_alias=True), top_k)
     return Task(task_id=str(task_id), status='Processing')
 
 
-@router.post(
+@router.get(
     '/predict/{task_id}',
     response_model=TaskResponse,
     status_code=200,

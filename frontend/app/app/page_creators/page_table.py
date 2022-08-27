@@ -3,5 +3,5 @@ from app.config import settings
 
 
 PAGE_TABLE = {
-    settings.key_home_page: home_page.create_page
+    settings.home_page_key: home_page.create_page
 }

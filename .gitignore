@@ -1,5 +1,5 @@
 .vscode
 .mypy_cache
 docker-stack.yml
-tmp/
+/**/tmp/
 __pycache__
