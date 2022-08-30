@@ -37,7 +37,7 @@ class RecanimeApi():
             logger.info("Start to predict the top k of the recommended animnes")
 
             create_task_api_headers = {
-                "accept": "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json"
             }
             api_endpoint = "predict"
@@ -48,21 +48,22 @@ class RecanimeApi():
             create_task_api_params = {
                 "top_k": top_k
             }
-            
+
             resp = requests.post(
                 url=create_task_api_url,
                 json=anime_attributes.dict(by_alias=True),
                 params=create_task_api_params,
                 headers=create_task_api_headers,
                 timeout=timeout
-            )           
+            )
+
             result = resp.json()
             task = Task(**result)
 
             logger.info("Get result from the task_id...")
 
             get_task_result_api_headers = {
-                "accept": "application/json",
+                "Accept": "application/json",
             }
             get_task_result_api_url = posixpath.join(
                 create_task_api_url,
