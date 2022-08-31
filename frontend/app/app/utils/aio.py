@@ -1,9 +1,8 @@
 import asyncio
 import functools
 import logging
-from typing import Coroutine
 from concurrent.futures import ThreadPoolExecutor
-
+from typing import Coroutine
 
 logger = logging.getLogger(__name__)
 
@@ -26,8 +25,6 @@ def execute_coroutine_in_event_loop(coroutine: Coroutine):
 
         return result
     else:
-        result = event_loop.run_until_complete(
-            coroutine
-        )
+        result = event_loop.run_until_complete(coroutine)
 
         return result

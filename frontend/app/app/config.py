@@ -5,10 +5,10 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    
+
     logger_name = "recanime-frontend"
     logger = logging.getLogger(logger_name)
-    
+
     # page keys
     home_page_key: Text = "home-page"
 

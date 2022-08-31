@@ -11,10 +11,7 @@ def create_app():
     placeholder = st.empty()
     dispatcher(
         placeholder=placeholder,
-        page_tab=PageTab(
-            page_name="home-page",
-            key=settings.home_page_key
-        )
+        page_tab=PageTab(page_name="home-page", key=settings.home_page_key),
     )
 
 
