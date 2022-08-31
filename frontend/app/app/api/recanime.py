@@ -56,7 +56,7 @@ class RecanimeApi:
                 "Accept": "application/json",
             }
             get_task_result_api_url = posixpath.join(create_task_api_url, task.task_id)
-            results = []
+            results: Dict = {}
             while True:
                 resp = requests.get(
                     url=get_task_result_api_url,
