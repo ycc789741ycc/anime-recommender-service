@@ -1,6 +1,6 @@
 import functools
 import logging
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from asgiref.sync import async_to_sync
 from celery import Task
@@ -24,7 +24,7 @@ class PredictTask(Task):
 
     abstract = True
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         logging.info("Loading Anime Data...")
         self.excel_anime_store = ExcelAnimeStore(
@@ -45,7 +45,7 @@ class PredictTask(Task):
             existed_user_attributes_vector=self.existed_user_attributes_vector,
         )
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs) -> Any:
         return self.run(*args, **kwargs)
 
 

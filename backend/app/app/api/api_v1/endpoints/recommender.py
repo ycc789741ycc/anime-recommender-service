@@ -1,5 +1,5 @@
 import time
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from celery.result import AsyncResult
 from fastapi import APIRouter, Depends
@@ -33,7 +33,7 @@ async def anime_recommender_predict(
 )
 async def anime_recommender_predict_result(
     task_id, start_time: float = Depends(start_time)
-) -> TaskResponse:
+) -> Any:
     """Fetch result for given task_id"""
 
     response = TaskResponse(task_id=task_id)
