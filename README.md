@@ -1,5 +1,5 @@
 # Anime-Recommender-Service
-* This repository implement the way to combine machine learning model  
+* This repository implement a way to combine machine learning model  
 (recommender system) with FastApi backend and celery worker with Streamlit  
 as frontend demonstration.  
 * The machine model is implemented in the [recanime](https://github.com/ycc789741ycc/anime-recommender-system)  package  
