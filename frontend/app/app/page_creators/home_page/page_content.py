@@ -59,7 +59,12 @@ def create_page(placeholder: "st._DeltaGenerator", *args, **kwargs):
 def handle_reset_button_click():
     """handle when reset button is clicked"""
 
+    global recanime_predict_results_pd
+
     set_session_state(init_anime_attributes_value_state)
+    recanime_predict_results_pd = pd.DataFrame(
+        {"anime name": [], "synopsis": [], "score": []}
+    )
 
 
 def handle_predict_button_click():
