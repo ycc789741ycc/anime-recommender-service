@@ -16,3 +16,11 @@ as frontend demonstration.
 ```bash
 docker-compose up -d
 ```
+Website URL:  
+`http://localhost`  
+
+Backend Swagger UI URL:  
+`http://localhost/docs`  
+
+Traefik UI URL:  
+`http://localhost:8090`  
