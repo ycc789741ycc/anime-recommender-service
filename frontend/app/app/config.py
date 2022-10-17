@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     home_page_key: Text = "home-page"
 
     # urls
-    recanime_backend_base_url: Text = "http://anime-recommender-service_proxy_1/api/v1"
+    recanime_backend_base_url: Text = "http://anime-recommender-service-proxy/api/v1"
     # recanime_backend_base_url: Text = "http://localhost/api/v1"
 
     class Config:
